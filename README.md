@@ -6,3 +6,6 @@ This project highlights the usage of -
 5. How to implement centralized logging.
 6. How to properly handle authentication and authorization.
 7. Optimizing the EF-Core querries.
+8. Implementing caching.
+9. Concurrency Control.
+10. Implementing background jobs.
