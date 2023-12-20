@@ -1,5 +1,5 @@
 This project highlights the usage of -
-1. Clean Architecture.
+1. Clean Architecture -> Project Set-Up.
 2. Test Driven Development.
 3. CRUD with CQRS Pattern.
 4. How to implement centralized exception handling.
