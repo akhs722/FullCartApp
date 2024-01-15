@@ -1,12 +1,17 @@
 ﻿using Application.Contratcs.Repos;
 using Application.Contratcs.Services;
 using Application.Services;
+using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Context;
+using Infrastructure.MappingProfiles;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
+using System.Text;
 using static FullCartAPI.Constants.APIConstants;
 
 namespace FullCartAPI.Extensions
@@ -57,6 +62,7 @@ namespace FullCartAPI.Extensions
 
         private static void AddApplication(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton(GetMapper());
             services.AddScoped<IAuthService, AuthService>();
            
         }
@@ -64,6 +70,45 @@ namespace FullCartAPI.Extensions
         {
             services.AddScoped<IAuthRepo, AuthRepo>();
            
+        }
+
+
+        public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            var secret = jwtSettings.GetSection("Secret").Value;
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings["validIssuer"],
+                    ValidAudience = jwtSettings["validAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                        .GetBytes(secret))
+                };
+            });
+        }
+
+        private static IMapper GetMapper()
+        {
+
+            var mappingConfig = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AddProfiles(ProfileMaster.DomainAndEntityMappings);
+                    cfg.AllowNullCollections = true;
+                    cfg.AllowNullDestinationValues = true;
+                }
+                );
+            return mappingConfig.CreateMapper();
         }
 
     }

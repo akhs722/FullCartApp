@@ -1,5 +1,6 @@
 ﻿using Application.Contratcs.Services;
 using Domain.DTO;
+using FullCartAPI.BaseClasses;
 using FullCartAPI.Constants;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace FullCartAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ExceptionHandler
     {
 
         
@@ -23,6 +24,7 @@ namespace FullCartAPI.Controllers
 
         public async Task<IActionResult> RegisterUserAsync(SignUpDTO request)
         {
+
             return await HandleRequestAsync( async () =>
             {
                 var res = await _authService.SignUpAsync(request);
@@ -30,16 +32,17 @@ namespace FullCartAPI.Controllers
             });
         }
 
-        private async Task<IActionResult> HandleRequestAsync(Func<Task<IActionResult>> action)
+        [HttpPost]
+        [Route(APIConstants.Auth.SignIn)]
+
+        public async Task<IActionResult> SignInAsync(SignInDTO request)
         {
-            try
+            return await HandleRequestAsync(async () =>
             {
-                return await action.Invoke();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
+                var res = await _authService.SignInAsync(request);
+                return Ok(res);
+            });
         }
+
     }
 }
