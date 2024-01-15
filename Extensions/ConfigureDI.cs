@@ -2,7 +2,7 @@
 using Application.Contratcs.Services;
 using Application.Services;
 using AutoMapper;
-using Domain.Entities;
+using Domain.Entities.User;
 using Infrastructure.Context;
 using Infrastructure.MappingProfiles;
 using Infrastructure.Repositories;
@@ -64,12 +64,15 @@ namespace FullCartAPI.Extensions
         {
             services.AddSingleton(GetMapper());
             services.AddScoped<IAuthService, AuthService>();
-           
+            services.AddScoped<IItemService, ItemService>();
+
+
         }
         private static void AddInfraStructure(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<IAuthRepo, AuthRepo>();
-           
+            services.AddScoped<IItemRepo, ItemRepo>();
+
         }
 
 
