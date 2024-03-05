@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FullCartAPI.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDI(builder.Configuration);
-
+builder.Services.ConfigureVersioning();
 builder.Services.ConfigureIdentity();
 
 builder.Services.ConfigureJWT(builder.Configuration);
@@ -28,9 +28,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
