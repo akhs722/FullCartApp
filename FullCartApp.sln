@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0B4F4B8A-0BE7-44B5-AEDA-1DDC91FD4BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{CAE793F8-AE42-49DC-9581-76DAF6FD236C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{CAE793F8-AE42-49DC-9581-76DAF6FD236C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullCartApp.Tests", "..\FullCartApp.Tests\FullCartApp.Tests.csproj", "{F6CF6CEC-E8D8-4A6B-A256-3519AEC2EC89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CAE793F8-AE42-49DC-9581-76DAF6FD236C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE793F8-AE42-49DC-9581-76DAF6FD236C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAE793F8-AE42-49DC-9581-76DAF6FD236C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6CF6CEC-E8D8-4A6B-A256-3519AEC2EC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CF6CEC-E8D8-4A6B-A256-3519AEC2EC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CF6CEC-E8D8-4A6B-A256-3519AEC2EC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CF6CEC-E8D8-4A6B-A256-3519AEC2EC89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
